@@ -120,8 +120,6 @@ trainX_corr = np.asarray(trainX)[:,:,cl]
 testX_corr = np.asarray(testX)[:,:,cl]
 #pd.DataFrame(np.asarray(valiY_nofilt)*maxv).to_csv(r'E:/gongtiS/result/reexperiment/valiY%dp%d.csv'%(inputsteps,predstep),columns=None,header=None)
 pd.DataFrame(np.asarray(testY_nofilt)*maxv).to_csv(r'E:/gongtiS/result/reexperiment/testY%dp%d.csv'%(inputstep,predstep),columns=None,header=None)
-#pd.DataFrame(np.asarray(valiY)*maxv).to_csv('/home/jinan/knnresult/valicorr%dp%d/valiY_filter.csv'%(inputsteps,predstep),columns=None,header=None)
-#pd.DataFrame(np.asarray(testY)*maxv).to_csv('/home/jinan/knnresult/valicorr%dp%d/testY_filter.csv'%(inputsteps,predstep),columns=None,header=None)
 
 
 print('calcuating trend vectors...')
@@ -193,8 +191,7 @@ pd.DataFrame((np.asarray(pred).reshape(-1,link)*maxv),columns=None).to_csv(r'E:/
 f = open(r'E:/gongtiS/result/reexperiment/logcorr_%dp%d.txt'%(inputstep,predstep),'a')
 f.write('\nalpha=%.1f,k=%d,RMSE=%.4f,MAPE=%.4f'%(alpha,k,RMSE,MAPE*100))
 f.close
-#pd.DataFrame(np.asarray(rmse),columns=None).to_csv('/home/jinan/knnresult/l/RMSE%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
-#pd.DataFrame(np.asarray(mape),columns=None).to_csv('/home/jinan/knnresult/l/MAPE%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
+
 trainX,trainY,trainY_nofilt,trainX_corr=[],[],[],[]
 #valiX,valiY,valiY_nofilt,valiX_corr=[],[],[],[]
 testX,testY,testY_nofilt,testX_corr=[],[],[],[]
