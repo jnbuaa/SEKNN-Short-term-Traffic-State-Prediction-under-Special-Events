@@ -80,7 +80,6 @@ print('predstep=%d'%predstep)
 print('RMSE:%.4f'%RMSE)
 print('MAPE:%.4f%%'%(MAPE*100))
 
-pd.DataFrame((np.asarray(predY).reshape(-1,link)*maxv),columns=None).to_csv(r'F:/[磕盐]服务器/NanJi/response/SVR-prep%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
-f=open(r'F:/[磕盐]服务器/NanJi/response/log-SVR-prep%dp%d.txt'%(inputstep,predstep),'a')
-f.write('\nRMSE=%.4f,MAPE=%.4f,best_parameters=%s'%(RMSE,MAPE*100,str(svr_vali.best_params_)))
-f.close
+pd.DataFrame((np.asarray(predY).reshape(-1,link)*maxv),columns=None).to_csv(r'F:/NanJi/response/SVR-prep%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
+with open(r'F:/NanJi/response/log-SVR-prep%dp%d.txt'%(inputstep,predstep),'a') as f:
+  f.write('\nRMSE=%.4f,MAPE=%.4f,best_parameters=%s'%(RMSE,MAPE*100,str(svr_vali.best_params_)))
