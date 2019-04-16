@@ -73,7 +73,7 @@ trainX = np.load('H:/ARN/trainX_out_of_order.npy').reshape(-1,inputstep,162,224,
 trainY = np.load('H:/ARN/trainY_out_of_order.npy')
 
 earlyStopping = EarlyStopping(monitor='val_loss',min_delta=0,patience=15,verbose=1)
-modelCheckPoint = ModelCheckpoint(filepath='F:/[磕盐]服务器/NanJi/response/SRCN%dp%d.h5'%(inputstep,predstep),monitor='val_loss',save_best_only=True,mode='min',verbose=0)
+modelCheckPoint = ModelCheckpoint(filepath='F:/NanJi/response/SRCN%dp%d.h5'%(inputstep,predstep),monitor='val_loss',save_best_only=True,mode='min',verbose=0)
 print('Training...')
 history = model.fit(trainX,trainY,batch_size=64,epochs=2000,validation_split=0.05,callbacks=[earlyStopping,modelCheckPoint])
 
@@ -101,6 +101,6 @@ print('predstep=%d'%predstep)
 print('RMSE:%.4f'%RMSE)
 print('MAPE:%.4f%%'%(MAPE*100))
 
-pd.DataFrame((np.asarray(predY).reshape(-1,link)),columns=None).to_csv(r'F:/[磕盐]服务器/NanJi/response/SRCN-prep%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
-with open(r'F:/[磕盐]服务器/NanJi/response/log-SRCN.txt','a') as f:
+pd.DataFrame((np.asarray(predY).reshape(-1,link)),columns=None).to_csv(r'F:/NanJi/response/SRCN-prep%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
+with open(r'F:/NanJi/response/log-SRCN.txt','a') as f:
     f.write('\ninputstep=%d,predstep=%d,RMSE=%.4f,MAPE=%.4f'%(inputstep,predstep,RMSE,MAPE*100))
