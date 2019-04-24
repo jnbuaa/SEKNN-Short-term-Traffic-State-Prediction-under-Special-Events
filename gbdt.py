@@ -65,12 +65,12 @@ end = time.time()
 
 # print('#####model predicting on trainX...#####')
 # tpredY = gbdt_test.predict(trainX[:,-1,:])
-# RMSE = np.mean(np.sqrt(np.square(np.asarray(tpredY).reshape(-1,link)*maxv-np.asarray(trainY_nofilt).reshape(-1,link)*maxv)))
+# MAE = np.mean(np.abs(np.asarray(tpredY).reshape(-1,link)*maxv-np.asarray(trainY_nofilt).reshape(-1,link)*maxv))
 # MAPE = np.mean(np.abs(np.asarray(tpredY).reshape(-1,link)-np.asarray(trainY_nofilt).reshape(-1,link))/np.asarray(trainY_nofilt).reshape(-1,link))
 # print('running time:',(end-start).seconds)
 # print('inputstep=%d'%inputstep)
 # print('predstep=%d'%predstep)
-# print('RMSE:%.4f'%RMSE)
+# print('MAE:%.4f'%MAE)
 # print('MAPE:%.4f%%'%(MAPE*100))
 trainX, trainY, train_nofilt = [], [], []
 
@@ -81,17 +81,17 @@ print('preprocessing test data...')
 testX, testY, testY_nofilt = dp.predata(test)
 print('#####model predicting on testX...#####')
 predY = gbdt_test.predict(testX[:, -1, :])
-RMSE = np.mean(np.sqrt(np.square(np.asarray(predY).reshape(-1, link) * maxv - np.asarray(testY_nofilt).reshape(-1, link) * maxv)))
+MAE = np.mean(np.abs(np.asarray(tpredY).reshape(-1,link)*maxv-np.asarray(trainY_nofilt).reshape(-1,link)*maxv))
 MAPE = np.mean(np.abs(np.asarray(predY).reshape(-1, link) - np.asarray(testY_nofilt).reshape(-1, link)) / np.asarray(
             testY_nofilt).reshape(-1, link))
 print('running time:', (end - start))
 print('inputstep=%d' % inputstep)
 print('predstep=%d' % predstep)
-print('RMSE:%.4f' % RMSE)
+print('MAE:%.4f' % MAE)
 print('MAPE:%.4f%%' % (MAPE * 100))
 
 pd.DataFrame((np.asarray(predY).reshape(-1, link) * maxv), columns=None).to_csv(
         r'F:/NanJi/response/GBDT-prep%dp%d.csv' % (inputstep, predstep), header=None, columns=None)
 with open(r'F:/NanJi/response/log-GBDT.txt', 'a') as f:
-    f.write('\ninputstep=%d,predstep=%d,RMSE=%.4f,MAPE=%.4f,best_parameters=%s' % (
-        inputstep, predstep, RMSE, (MAPE * 100), str(bestParams)))
+    f.write('\ninputstep=%d,predstep=%d,MAE=%.4f,MAPE=%.4f,best_parameters=%s' % (
+        inputstep, predstep, MAE, (MAPE * 100), str(bestParams)))
