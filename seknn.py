@@ -174,22 +174,22 @@ for ind_a,a in enumerate(testX_corr):
     sys.stdout.flush()
     
 end=datetime.datetime.now()
-RMSE = np.mean(np.sqrt(np.square(np.asarray(pred).reshape(-1,link)*maxv-np.asarray(testY_nofilt).reshape(-1,link)*maxv)))
+MAE = np.mean(np.abs(np.asarray(predY).reshape(-1, link) * maxv - np.asarray(testY_nofilt).reshape(-1, link) * maxv))
 MAPE = np.mean(np.abs(np.asarray(pred).reshape(-1,link)-np.asarray(testY_nofilt).reshape(-1,link))/np.asarray(testY_nofilt).reshape(-1,link))
-rmse.append(RMSE)
+mae.append(MAE)
 mape.append(MAPE)
 print('running time:',(end-start).seconds)
 print('alpha=%.1f'%alpha)
 print('k=%d'%k)
 print('inputstep=%d'%inputstep)
 print('predstep=%d'%predstep)
-print('RMSE:%.4f'%RMSE)
+print('MAE:%.4f'%MAE)
 print('MAPE:%.4f%%'%(MAPE*100))
 
 pd.DataFrame((np.asarray(pred).reshape(-1,link)*maxv),columns=None).to_csv(r'E:/gongtiS/result/reexperiment/prep%dp%d_k%d_a%d.csv'%(inputstep,predstep,k,alpha*10),header=None,columns=None)
 
 f = open(r'E:/gongtiS/result/reexperiment/logcorr_%dp%d.txt'%(inputstep,predstep),'a')
-f.write('\nalpha=%.1f,k=%d,RMSE=%.4f,MAPE=%.4f'%(alpha,k,RMSE,MAPE*100))
+f.write('\nalpha=%.1f,k=%d,MAE=%.4f,MAPE=%.4f'%(alpha,k,MAE,MAPE*100))
 f.close
 
 trainX,trainY,trainY_nofilt,trainX_corr=[],[],[],[]
