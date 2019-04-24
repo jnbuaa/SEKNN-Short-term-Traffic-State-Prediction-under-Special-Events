@@ -102,13 +102,13 @@ plt.show()
 
 print('\n#####model predicting on testX...#####')
 predY = sae.predict(testX)
-RMSE = np.mean(np.sqrt(np.square(np.asarray(predY).reshape(-1,link)*maxv-np.asarray(testY_nofilt).reshape(-1,link)*maxv)))
+MAE = np.mean(np.abs(np.asarray(predY).reshape(-1, link) * maxv - np.asarray(testY_nofilt).reshape(-1, link) * maxv))
 MAPE = np.mean(np.abs(np.asarray(predY).reshape(-1,link)-np.asarray(testY_nofilt).reshape(-1,link))/np.asarray(testY_nofilt).reshape(-1,link))
 print('inputstep=%d'%inputstep)
 print('predstep=%d'%predstep)
-print('RMSE:%.4f'%RMSE)
+print('MAE:%.4f'%MAE)
 print('MAPE:%.4f%%'%(MAPE*100))
 
 pd.DataFrame((np.asarray(predY).reshape(-1,link)*maxv),columns=None).to_csv(r'F:/NanJi/response/SAE-prep%dp%d.csv'%(inputstep,predstep),header=None,columns=None)
 with open(r'F:/NanJi/response/log-SAE-prep%dp%d.txt'%(inputstep,predstep),'a') as f:
-    f.write('\ninputstep=%d,predstep=%d,RMSE=%.4f,MAPE=%.4f'%(inputstep,predstep,RMSE,MAPE*100))
+    f.write('\ninputstep=%d,predstep=%d,MAE=%.4f,MAPE=%.4f'%(inputstep,predstep,MAE,MAPE*100))
