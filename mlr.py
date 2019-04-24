@@ -44,18 +44,18 @@ testX,testY,testY_nofilt = dp.predata(test)
 print('#####model predicting on testX...#####')
 predY = mlr.predict(testX.reshape(testX.shape[0],testX.shape[1]*testX.shape[2]))
 
-RMSE = np.mean(np.sqrt(np.square(np.asarray(predY).reshape(-1, link) * maxv - np.asarray(testY_nofilt).reshape(-1, link) * maxv)))
+MAE = np.mean(np.abs(np.asarray(predY).reshape(-1, link) * maxv - np.asarray(testY_nofilt).reshape(-1, link) * maxv))
 MAPE = np.mean(np.abs(np.asarray(predY).reshape(-1, link) - np.asarray(testY_nofilt).reshape(-1, link)) / np.asarray(testY_nofilt).reshape(-1, link))
 print('running time:', (end - start))
 print('inputstep=%d' % inputstep)
 print('predstep=%d' % predstep)
-print('RMSE:%.4f' % RMSE)
+print('MAE:%.4f' % MAE)
 print('MAPE:%.4f%%' % (MAPE * 100))
 
 pd.DataFrame((np.asarray(predY).reshape(-1, link) * maxv), columns=None).to_csv(
     r'F:/[磕盐]服务器/NanJi/response/LR-prep%dp%d.csv' % (inputstep, predstep), header=None, columns=None)
 with open(r'F:/[磕盐]服务器/NanJi/response/log-LR.txt', 'a') as f:
-    f.write('\ninputstep=%d,predstep=%d,RMSE=%.4f,MAPE=%.4f' % (inputstep, predstep, RMSE, (MAPE * 100)))
+    f.write('\ninputstep=%d,predstep=%d,MAE=%.4f,MAPE=%.4f' % (inputstep, predstep, MAE, (MAPE * 100)))
 
 testX, testY, testY_nofilt, predY = [], [], [], []
 
