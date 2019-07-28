@@ -1,6 +1,6 @@
 # SEKNN-for-Short-term-Traffic-State-under-Special-Events
 
-The codes of paper "___A Special Event-based K-nearest Neighbor Model for Short-term Traffic State Predicton___", published in IEEE Access (www.doi.com/10.1109/ACCESS.2019.2923663).  
+The codes of paper "___A Special Event-based K-nearest Neighbor Model for Short-term Traffic State Predicton___", published in IEEE Access (www.doi.org/10.1109/ACCESS.2019.2923663).  
   
 Proposed method: SEKNN  
 Compared methods: Original KNN, MFCP, SVR, RF, GBDT, SAE, and SRCN. 
